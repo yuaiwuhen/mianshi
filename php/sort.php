@@ -187,3 +187,4 @@ function merge($left, $right)
 }
 $arr = [9, 1, 14, 4, 3, 10, 12, 6, 8, 2, 13, 7, 9, 11];
 echo implode(',', mergeSort($arr));
+
