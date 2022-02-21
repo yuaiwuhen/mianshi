@@ -1,5 +1,7 @@
->*  [PHP](#php)
+[PHP](#php)
+>* 1. [请详细描述ZendMM的工作原理](1.1)
 >*  [Mysql](#mysql)
+>*  [Redis](#redis)
 >*  [Nginx](#nginx)
 >*  [前端](#前端)
 >*  [通信协议](#通信协议)
@@ -14,6 +16,9 @@
 
 ### 
 [<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87)PHP
+
+<p id="1.1">
+</p>
 
 *   请详细描述ZendMM的工作原理。
 > ZendMM是php的内存管理逻辑，ZMM基于libc的基础上自己实现了一套内存管理机制，简单说就是在os、libc与应用之间新增了一个中间层，专门对内存进行管理，ZMM基于libc的内存管理方法重写的内存的释放和获取的e方法，在程序运行时，内存的释放和获取并不是直接和OS进行交互的，而是通过ZMM来实现，ZMM在向OS申请内存时不是需要多少申请多少，而是申请一块相对来说比较大的内存，保存在缓冲区内，下次申请直接从缓冲区内获取分配内存，同样在释放内存时，内存也不是立马回到os中，而是在zmm的缓冲区中标识该内存为可用状态，因此产生了很多的内存碎片，看起来内存使用情况很多，在php5.2及之前，由于没有很好的垃圾回收机制，所以不适合用来做守护进程长期运行。在php5.3及之后，到现在的php7，引入了引用计数的同步回收算法，新的GC机制。
@@ -614,9 +619,9 @@ MVCC实现
 >3. 在cache里记录哪些记录发生过写请求，来路由读主还是读从
 
 * InnoDB 内存结构包含四大核心组件
->* 缓冲池 (Buffer Pool)，可以参考沈健老师文章 [缓冲池 (buffer pool)，这次彻底懂了！！！](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962467&idx=1&sn=899ea157b0fc6f849ec80a4d055a309b&chksm=bd2d09bf8a5a80a972a2e16a190ed7dffe03f89015ead707bdfcc5aeb8388fb278f397c125f1&scene=21#wechat_redirect)
+>* 缓冲池 (Buffer Pool)，可以参考沈健老师文章 [缓冲池 (buffer pool)，这次彻底懂了！！！](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962450&idx=1&sn=ce17c4da8d20ce275f75d0f2ef5e40c9&chksm=bd2d098e8a5a809834aaa07da0d7546555385543fb6d687a7cf94d183ab061cd301a76547411&scene=21#wechat_redirect)
 
->* 写缓冲 (Change Buffer)，可以参考沈健老师文章 [写缓冲 (change buffer)，这次彻底懂了！！！](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962450&idx=1&sn=ce17c4da8d20ce275f75d0f2ef5e40c9&chksm=bd2d098e8a5a809834aaa07da0d7546555385543fb6d687a7cf94d183ab061cd301a76547411&scene=21#wechat_redirect)
+>* 写缓冲 (Change Buffer)，可以参考沈健老师文章 [写缓冲 (change buffer)，这次彻底懂了！！！](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962467&idx=1&sn=899ea157b0fc6f849ec80a4d055a309b&chksm=bd2d09bf8a5a80a972a2e16a190ed7dffe03f89015ead707bdfcc5aeb8388fb278f397c125f1&scene=21#wechat_redirect)
 
 >* 自适应哈希索引 (Adaptive Hash Index)，[可以参考沈健老师文章自适应哈希索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962875&idx=1&sn=c6b3e7dc8a41609cfe070026bd27b71d&chksm=bd2d08278a5a813108b1f4116341ff31170574b9098e2708cbc212b008a1fac8dfd1ffeabc6b&scene=21#wechat_redirect)
 >* 日志缓冲 (Log Buffer)，[可以参考沈健老师文章 事务已提交，数据却丢了，赶紧检查下这个配置！！！ | 数据库系列](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962887&idx=1&sn=4806f481448b1c3ddfbbd53e732a7bb5&chksm=bd2d0bdb8a5a82cd50bc155ed2ba57f105bfd76ff78992823ed85214b5c767eef17e691a2255&scene=21#wechat_redirect)
@@ -827,6 +832,9 @@ MVCC实现
 >* 意向锁 - [ intention lock,分为意向共享锁（IS锁）和意向排他锁（IX锁）]
 >* 行锁 - [ record Locks、gap locks、next-key locks、Insert Intention Locks ]
 >* 自增锁 - [ auto-inc locks ]
+
+<p id="redis">
+</p>
 
 ### 
 [<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#redis)Redis
