@@ -1,15 +1,88 @@
-[PHP](#php)
->* 1. [请详细描述ZendMM的工作原理](1.1)
->*  [Mysql](#mysql)
->*  [Redis](#redis)
->*  [Nginx](#nginx)
->*  [前端](#前端)
->*  [通信协议](#通信协议)
->*  [kafka](#kafka)
->*  [es](#es)
->*  [分布式](#分布式)
->*  [其他](#其他)
->*  [排序算法](php/sort.php)
+<details>
+<summary>PHP</summary>
+
+*  [请详细描述ZendMM的工作原理](#1.1)
+*  [PHP 7 的垃圾回收和 PHP 5 有什么区别？](#1.2)
+*  [描述一下 cli 模式下的几个生命周期](#1.3)
+*  [php-fpm 运行机制？](#1.4)
+*  [php-fpm 的生命周期](#1.5)
+*  [php-fpm创建进程方式，各自的优缺点](#1.6)
+*  [常见魔术方法和函数](#1.7)
+*  [php 数组遍历为什么能保证有序](#1.8)
+*  [内存分配流程？为什么要这么设计？](#1.9)
+*  [GC 的出现是为了解决什么问题？什么时候会触发 GC？说下大概流程](#1.10)
+*  [nginx 和 php-fpm 的通信机制](#1.11)
+*  [fast-cgi 和 cgi 区别](#1.12)
+*  [php-fpm 创建 worker 进程的规则是什么？不同场景下怎么选择？](#1.13)
+*  [php 和 mysql 的通信机制？长链接和短链接啥区别？怎么实现的？连接池要怎么实现？](#1.14)
+*  [PHP 7 中对zVal做了哪些修改？ 以php 7.0.0为例，后续版本还在不断的优化更新](#1.15)
+*  [PHP 7 中哪些变量类型在栈，哪些变量类型在堆？变量在栈会有什么优势？PHP 7是如何让变量新建在栈的？](#1.16)
+*  [php 里的数组是怎么实现的？](#1.17)
+*  [详细描述PHP中HashMap的结构是如何实现的？](#1.18)
+*  [JIT 是做了哪些优化，从而对PHP的速度有不少提升？](#1.19)
+*  [strtr 和 str_replace 有什么区别，两者分别用在什么场景下？](#1.20)
+*  [strtr的程序是如何实现的？](#1.21)
+*  [字符串在手册中介绍，「PHP的字符串是二进制安全的」，这句话怎么理解，为什么是二进制安全？](#1.22)
+*  [字符串连接符.，在内核中有哪些操作？多次.连接，是否会造成内存碎片过多？](#1.23)
+*  [接口和抽象类的区别是什么？](#1.24)
+*  [返回一个301重定向的方法](#1.25)
+*  [strtoupper 在转换中文时存在乱码，你如何解决？php echo strtoupper (‘ab 你好 c’);](#1.26)
+*  [csrf与xss攻击的详解与区别](#1.27)
+*  [PHP中创建多线程、多进程有哪些方式？互斥信号该如何实现？](#1.28)
+*  [PHP中使用多线程和多进程分别有哪些优缺点？](#1.29)
+*  [线上环境中，PHP进程偶尔会卡死（死锁），请问如何检测本质问题？](#1.30)
+*  [Laravel的中间件的顺序执行，是如何实现的？](#1.31)
+*  [实现管道的makeFn函数](#1.32)
+*  [使用cUrl下载大文件时，占用内存太大，有没比较优化的方式？](#1.33)
+*  [PHP 上传大文件（比如：2 GiB的视频），需要修改php.ini的哪些配置以免受到上传的大小限制？或者你有其它更好的方式？](#1.34)
+*  [用PHP实现一个定时任务器？](#1.35)
+*  [PHP中密码加密，使用什么方式加密？这种加密的优点是什么？](#1.36)
+*  [PHP 7.2 新增的加密方法的名称是？](#1.37)
+*  [如何读取某函数的参数列表，以及参数的默认值。](#1.38)
+*  [描述下IoC （DI）的实现原理](#1.39)
+</details>
+
+<details>
+<summary>Mysql</summary>
+
+*  [搭建MySQL分布式，有哪些方式？](#2.1)
+*  [MySQL主从同步，和主主同步有哪些区别，以及优劣势？](#2.2)
+*  [Laravel中，多态一对多，多对多，数据库要怎么设计？比如一个关键词表tags，需要关联用户、帖子、评论、视频等表。](#2.3)
+*  [MySQL防止注入有哪些方式？](#2.4)
+*  [描述MySQL的注入原理？](#2.5)
+*  [怎么解决数据库中常见的 N+1 效率问题](#2.6)
+*  [哪些情况下字段允许null，哪些情况下不允许？](#2.7)
+*  [MySQL中脏读应该怎么处理？ 引申：比如京东的库存，0点多人抢购的时候库存问题？](#2.8)
+*  [如下数据库中会有哪些值](#2.9)
+*  [innodb 的数据组织方式？](#2.10)
+*  [B + 树的结构和插入细节？为什么主键一般都要自增？和 B 树什么区别？为什么索引要使用 B + 树不是 B 树也不是其他的平衡树？](#2.11)
+*  [hash比B+树更快，为什么mysql用B+树来存储索引呢？](#2.12)
+*  [为什么不用红黑树或者二叉排序树？](#2.13)
+*  [既然增加树的路数可以降低树的高度，那么无限增加树的路数是不是可以有最优的查找效率？](#2.14)
+*  [在内存中，红黑树比B树更优，但是涉及到磁盘操作B树就更优了，那么你能讲讲B+树吗？](#2.15)
+*  [为什么B+树要这样设计？](#2.16)
+*  [mysql常见的优化](#2.17)
+</details>
+
+[Mysql](#mysql)
+
+[Redis](#redis)
+
+[Nginx](#nginx)
+
+[前端](#前端)
+
+[通信协议](#通信协议)
+
+[kafka](#kafka)
+
+[es](#es)
+
+[分布式](#分布式)
+
+[其他](#其他)
+
+[排序算法](php/sort.php)
 
 <p id="php">
 </p>
@@ -24,6 +97,9 @@
 > ZendMM是php的内存管理逻辑，ZMM基于libc的基础上自己实现了一套内存管理机制，简单说就是在os、libc与应用之间新增了一个中间层，专门对内存进行管理，ZMM基于libc的内存管理方法重写的内存的释放和获取的e方法，在程序运行时，内存的释放和获取并不是直接和OS进行交互的，而是通过ZMM来实现，ZMM在向OS申请内存时不是需要多少申请多少，而是申请一块相对来说比较大的内存，保存在缓冲区内，下次申请直接从缓冲区内获取分配内存，同样在释放内存时，内存也不是立马回到os中，而是在zmm的缓冲区中标识该内存为可用状态，因此产生了很多的内存碎片，看起来内存使用情况很多，在php5.2及之前，由于没有很好的垃圾回收机制，所以不适合用来做守护进程长期运行。在php5.3及之后，到现在的php7，引入了引用计数的同步回收算法，新的GC机制。
 > 如果需要完全禁用ZendMM，则可以使用USE_ZEND_ALLOC=0env var 启动PHP 。这样，每次对ZendMM API的调用（如emalloc()）都将定向到libc调用，并且ZendMM将被禁用。这在调试内存时特别有用。
 
+<p id="1.2">
+</p>
+
 *   PHP 7 的垃圾回收和 PHP 5 有什么区别？
 > PHP的垃圾回收机制以引用计数为基础
 > PHP5.2与PHP5.3的垃圾回收机制有很大的区别，5.2基于引用计数算法进行垃圾回收，引用计数为0时即触发回收机制，再着对于循环引用无法触发回收机制，refcount回不到0，造成内存泄露，因此php5.2及之前的版本无法胜任守护进程长期运行的工作。
@@ -31,6 +107,9 @@
 > PHP7的垃圾回收机制与PHP5.3差别不大，PHP7主要区别在于对zval结构体进行了优化。
 > 简单的数据类型不需要单独分配内存，也不需要计数，减少了大量的内存分配和释放操作，避免了内存分配的头部冗余。
 > 复杂数据类型引用计数由数值自己本身存储，因此可以和非zval结构的数据共享。
+
+<p id="1.3">
+</p>
 
 *   描述一下 cli 模式下的几个生命周期？
 
@@ -41,10 +120,16 @@
 >*    停用模块[RSHUTDOWN]
 >*    关闭模块[MSHUTDOWN]
 
+<p id="1.4">
+</p>
+
 *   php-fpm 运行机制？
 > 首先启动一个master进程和多个worker进程
 > master进程负责监听端口、cgi、php环境初始化、子进程状态，接受来自web server服务器的请求
 > worker进程负责处理php请求，每个进程内部嵌入了一个php解释器，是php代码真正执行的地方
+
+<p id="1.5">
+</p>
 
 *   php-fpm 的生命周期
 >fpm通过sapi接口与php进程交互
@@ -60,6 +145,9 @@
 >5. 模块关闭阶段（module shutdown）：
 该阶段在SAPI关闭时执行，与模块初始化阶段对应，这个阶段主要是进行资源的清理、php各模块的关闭操作，同时，将回调各扩展的module shutdown钩子函数。这是发生在所有请求都已经结束之后，例如关闭fpm的操作。（这个是对于CGI和CLI等SAPI，没有“下一个请求”，所以SAPI立刻开始关闭。）
 
+<p id="1.6">
+</p>
+
 *  php-fpm创建进程方式，各自的优缺点
 >1. static 模式（静态模式）
 static 模式始终会保持一个固定数量的子进程，这个数量由 pm.max_children 的配置决定
@@ -67,6 +155,9 @@ static 模式始终会保持一个固定数量的子进程，这个数量由 pm.
 子进程的数量是动态变化的，启动时，会生成固定数量的子进程，可以理解为最小子进程数，通过 pm.statr_servers 配置决定，而最大子进程数则由 pm.max_children 控制，子进程数会在 pm.start_servers ~ pm.max_children 范围内波动，另外，闲置的子进程数还可以由 pm.min_spare_servers 和 pm.max_spare_servers 两个配置参数控制。总结：闲置的子进程也可以有最小数目和最大数目，而如果闲置的子进程超过 pm.max_spare_servers, 则会被杀死。
 >3. ondemand 模式（动态需求模式）
 这种模式和 dynamic 模式相反。因为这种模式把内存放在第一位，每个闲置进程在持续闲置了 pm.process_idle_timeout 秒后就会被杀死，因为这种模式，到了服务器低峰期的时候，内存就会降下来，如果服务器长时间没有请求，就只有一个主进程。其弊端是，遇到高峰期或者 pm.process_idle_timeout 设置太小，无法避免服务器频繁创建进程的问题。
+
+<p id="1.7">
+</p>
 
 *  常见魔术方法和函数
 >* __construct()，类的构造函数
@@ -87,29 +178,44 @@ static 模式始终会保持一个固定数量的子进程，这个数量由 pm.
 >* __debugInfo()，打印所需调试信息
 >* [100 个最常用的 PHP 函数](https://segmentfault.com/a/1190000018674933)
 
+<p id="1.8">
+</p>
+
 *  php 数组遍历为什么能保证有序
 >* 使用映射表于bucket实现有序性，映射表于bucket内存紧挨着，左边是映射表，右边是bucket
 >* 映射表保存了hash之后的值（转为负数），bucket按照插入顺序保存了插入的值，遍历的时候便利bucket就保持了有序性
 > [剖析PHP数组的有序性](https://segmentfault.com/a/1190000019964143)
 
-*   php-fpm 模式下，kill -9 master-pid，会怎么样？kill matser-pid 呢？
-> kill -9 强制退出，会丢失数据
+<p id="1.9">
+</p>
 
 *   内存分配流程？为什么要这么设计？
 > PHP有自己的内存管理逻辑，ZMM。大致逻辑为首先检查缓存，如果命中则使用缓存中的内存块，否则在堆层（heap）从小块内存，大块内存，剩余内存中查找合适内存，如果有则返回分配好的内存地址，否则向OS申请一块内存并返回。
 > 这么设计的原因
 > 避免直接向os申请内存，减少分配和释放操作，减轻os负担
 
+<p id="1.10">
+</p>
+
 *   GC 的出现是为了解决什么问题？什么时候会触发 GC？说下大概流程
 > 自动处理内存资源的分配与释放，解决内存泄露的问题
 > php version&gt;=5.3中当疑似垃圾根缓冲区满的时候，自动触发GC机制。GC机制见上面的回答。
 
+<p id="1.11">
+</p>
+
 *   `nginx` 和 `php-fpm` 的通信机制
 > uninx socket/tcp socket
+
+<p id="1.12">
+</p>
 
 *   fast-cgi 和 cgi 区别
 > cgi（`common gateway interface`）是一种协议,它规定了要传那些数据并以什么格式传递给后方处理这个请求的协议。
 > `fast-cgi`是用来提高cgi程序性能的，使用`master`进程来初始化执行环境，加载配置文件，同时启动多个`worder`进程来处理请求，避免了重复的初始化环境和解析配置文件，提高了效率
+
+<p id="1.13">
+</p>
 
 *   `php-fpm` 创建 `worker` 进程的规则是什么？不同场景下怎么选择？
 > `dynamic、static、ondemand`
@@ -117,13 +223,16 @@ static 模式始终会保持一个固定数量的子进程，这个数量由 pm.
 > static 固定数量的worker，推荐内存较大的服务器进行配置
 > dynamic 动态分配，推荐内存较少或者vps上使用，具体可采用 `内存/20~30M`得出
 
+<p id="1.14">
+</p>
+
 *   php 和 mysql 的通信机制？长链接和短链接啥区别？怎么实现的？连接池要怎么实现？
 > 长链接、短链接、连接池
 > 长链接、短链接的区别
 > 连接池实现
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E7%BB%93%E6%9E%84)结构
+<p id="1.15">
+</p>
 
 *   PHP 7 中对zVal做了哪些修改？
 _以php 7.0.0为例，后续版本还在不断的优化更新_
@@ -136,15 +245,24 @@ _以php 7.0.0为例，后续版本还在不断的优化更新_
 > 复杂的类型的值都内嵌了引用计数，因此它们可以不依赖zval机制而进行共享
 > 新增了是否需要引用的标志位（`IS_TYPE_REFCOUNTED`）
 
+<p id="1.16">
+</p>
+
 *   PHP 7 中哪些变量类型在栈，哪些变量类型在堆？变量在栈会有什么优势？PHP 7是如何让变量新建在栈的？
 > 简单类型如整型，布尔，浮点存放在栈，复杂类型如数组、对象、可变字符串存放在堆，但对应的名称在栈。
 > 变量在栈的优势是互相隔离，各自运行。栈内存更新快，内存可直接存取。
 > 新建的局部简单类型变量就默认在栈。
 > 栈：`LIFO pop,push,top`
 
+<p id="1.17">
+</p>
+
 *   php 里的数组是怎么实现的？
 > HashTable+双向链表
 > 参考资料 [php数组实现原理](https://blog.csdn.net/mysteryflower/article/details/101549756)
+
+<p id="1.18">
+</p>
 
 *   详细描述PHP中HashMap的结构是如何实现的？
 > HashMap的基本思想，使用哈希函数将复杂的键值转换为整数，然后整数可用作普通c数组的偏移量。但是问题在于2^32或者2^64的个数比字符串的数目（无穷多个）的数目少的多，这样就会出现两个不同的键的hash值一样的情况，PHP5在PHP7在处理这种冲突上是不一样的，都采用连接法方式处理冲突，但在具体实现上有着一些区别，php7在php5的基础上优化了HashMap结构体，去掉很多冗余的内存消耗。
@@ -163,22 +281,14 @@ php7中的处理方式
 > arData保存了所有的buckets(也就是数组的元素)，这个数组被分配的内存大小为2的幂次方，arData直接包含bucket结构，避免了过多的法分配和释放（`alloc/frees`）内存操作，同时避免了头开销冗余（header overhead）和额外的指针分配内存。
 > 关于元素的顺序，arData数组以插入的顺序保存元素。当某元素被删除时，只是将删除元素zval类型标记为`IS_UNDEF`。相比php5中的双向链表的方式，这里的每个bucket只需要保存两个指针，这两个指针的开销为8/16字节。同时对于缓存是友好的（cache-friendly）。不足的地方是arData很少会缩小，除非进行显式操作。
 
-*   下面代码中，在PHP 7下， $a 和 $b、$c、$d 分别指向什么zVal结构？
-
-*   $d 被修改的时候，PHP 7 / PHP 5 的内部分别会有哪些操作？
-
-    ```php
-    $a = 'string';
-    $b = &$a;
-    $c = &$b;
-    $d = $b;
-    $d = 'to';
+<p id="1.19">
+</p>
 
 *   JIT 是做了哪些优化，从而对PHP的速度有不少提升？
     > JIT可直接将源码编译成机器码，省去了中间字节码（opcode）的转换，再由php解释器转换成机器码（native code）的过程，大幅提升了执行效率。
 
-    #### 
-    [<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C)字符串操作
+<p id="1.20">
+</p>
 
 *   strtr 和 str_replace 有什么区别，两者分别用在什么场景下？
     > strtr是字符串转换 str_replace是字符串替换
@@ -188,6 +298,8 @@ php7中的处理方式
 >     推荐使用第2种用法，因为第1种用法有些特别注意的地方，
 >     一是from和to替换的规则是逐个转换,并不是整体替换，可看到下面的例子中you的o被替换成了O,显示不是我们想要的结果
     
+<p id="1.21">
+</p>
 
 *   strtr的程序是如何实现的？
     > 两种方式
@@ -195,6 +307,8 @@ php7中的处理方式
     > 第1种情况下，将from和to的每个字符利用hashtable一一对应起来，逐个完成字符串的转换。
     > 第2种情况下，首先使用key到主字符串中根据kmp算法查找key的位置（O(n)），如果找到则使用value进行替换（替换m次），效率为O(n*m)
 
+<p id="1.22">
+</p>
 
 *   字符串在手册中介绍，「PHP的字符串是二进制安全的」，这句话怎么理解，为什么是二进制安全？
 > 不会因为\0而中断字符串
@@ -203,9 +317,15 @@ php7中的处理方式
 > 而在php中，strlen函数是binary safe的，因为它不会对任何字符（包括'\0'）进行特殊解释，所以在php中，`strlen(str)=8`
 > 所以，我理解的二进制安全的意思是：只关心二进制化的字符串,不关心具体格式.只会严格的按照二进制的数据存取。不会妄图已某种特殊格式解析数据。
 
+<p id="1.23">
+</p>
+
 *   字符串连接符.，在内核中有哪些操作？多次.连接，是否会造成内存碎片过多？
 > 分配新的内存地址和释放旧的内存。
 > 多次使用.连接字符串会频繁的alloc/frees，造成更多的内存碎片。
+
+<p id="1.24">
+</p>
 
 *   接口和抽象类的区别是什么？
 >*  抽象类是一种不能被实例化的类，只能作为其他类的父类来使用。抽象类是通过关键字 abstract 来声明的。
@@ -213,6 +333,9 @@ php7中的处理方式
 >*  接口是通过 interface 关键字来声明的，接口中的成员常量和方法都是 public 的，方法可以不写关键字 public，接口中的方法也是没有方法体。接口中的方法也天生就是要被子类实现的。
 >*  抽象类和接口实现的功能十分相似，最大的不同是接口能实现多继承。在应用中选择抽象类还是接口要看具体实现。
 >*  子类继承抽象类使用 extends，子类实现接口使用 implements。
+
+<p id="1.25">
+</p>
 
 *   返回一个301重定向的方法
 
@@ -227,6 +350,9 @@ php7中的处理方式
     header("Location:your_dest_url");
 ```
 
+<p id="1.26">
+</p>
+
 *   strtoupper 在转换中文时存在乱码，你如何解决？php echo strtoupper (‘ab 你好 c’);
 >   用mbstring扩展，内部有个函数
 >   string mb_convert_case (string $str ,int $mode [,string $encoding = mb_internal_encoding()])
@@ -238,6 +364,9 @@ php7中的处理方式
 
         3.MB_CASE_TITLE ：转成首字母大写
 
+<p id="1.27">
+</p>
+
 *   csrf与xss攻击的详解与区别
 >*  CSRF的基本概念、缩写、全称：CSRF(Cross-site request forgery)：跨站请求伪造。
 >       *   Token 验证 解决
@@ -245,13 +374,16 @@ php7中的处理方式
 >       *   不需要你做任何的登录认证，它会通过合法的操作（比如在url中输入、在评论框中输入），向你的页面注入脚本（可能是js、hmtl代码块等）
 >       *   XSS的防范措施主要有三个：编码、过滤、校正
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E5%A4%9A%E7%BA%BF%E7%A8%8B)多线程
+<p id="1.28">
+</p>
 
 *   PHP中创建多线程、多进程有哪些方式？互斥信号该如何实现？
 > Pecl中有个扩展`pthreads`提供了多线程特性
 > 多进程可使用`proc_open/popen`函数
 > pthreads的`Mutex`类可以操作互斥信号；
+
+<p id="1.29">
+</p>
 
 *   PHP中使用多线程和多进程分别有哪些优缺点？
 > 线程比较轻量级，通过共享内存变量可实现线程间通信，但读写变量时存在同步问题，需要加锁。
@@ -262,6 +394,9 @@ php7中的处理方式
 > 单个线程的退出不会导致整个进程退出，父进程还有机会重建流程。
 > PHP原生使用的就是多进程模式
 
+<p id="1.30">
+</p>
+
 *   线上环境中，PHP进程偶尔会卡死（死锁），请问如何检测本质问题？
 > 通过`ps aux | grep php-cgi` 查看进程启动时间，定位启动时间较早的进程
 > 通过`lsof -p [pid] `查看进程都干了些啥
@@ -269,14 +404,18 @@ php7中的处理方式
 > 通过`gdb attach [pid]`分析获取调用堆栈
 > 或使用 [Swoole Tracker](https://www.swoole-cloud.com/tracker/index)
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E7%AE%A1%E9%81%93)管道
+<p id="1.31">
+</p>
 
 *   Laravel的中间件的顺序执行，是如何实现的？
 > 中间件核心类`Illuminate\Routing\Pipeline`，其中的`then()`方法利用了`array_reduce()`函数，将反转后(`array_reverse()`)的中间件数组分别以闭包的形式暂存到一个类似栈的结构中，这个结构我们可以理解为一个大的闭包，里面嵌套的包含了所有需要执行的中间件闭包，执行的时候顺序为从最外层开始往里面执行（后进先出），最后执行`Initial`。
 
+<p id="1.32">
+</p>
+
 *   实现管道的makeFn函数
-<div class="highlight highlight-text-html-php position-relative overflow-auto" data-snippet-clipboard-copy-content="function pipe($input, $list) {
+```php
+function pipe($input, $list) {
     $fn = makeFn($list);
     return $fn($input);
 }
@@ -295,73 +434,50 @@ function makeFn($list){
             $item($input, $item);
         }
     }
-}"><pre><span class="pl-k">function</span> <span class="pl-en">pipe</span>(<span class="pl-s1"><span class="pl-c1">$</span>input</span>, <span class="pl-s1"><span class="pl-c1">$</span>list</span>) {
-    <span class="pl-s1"><span class="pl-c1">$</span>fn</span> = <span class="pl-en">makeFn</span>(<span class="pl-s1"><span class="pl-c1">$</span>list</span>);
-    <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-c1">$</span>fn</span>(<span class="pl-s1"><span class="pl-c1">$</span>input</span>);
 }
-<span class="pl-s1"><span class="pl-c1">$</span>r</span> = <span class="pl-en">pipe</span>(<span class="pl-c1">0</span>, [<span class="pl-s1"><span class="pl-c1">$</span>a</span>, <span class="pl-s1"><span class="pl-c1">$</span>b</span>, <span class="pl-s1"><span class="pl-c1">$</span>c</span>]);
-<span class="pl-k">echo</span> <span class="pl-s1"><span class="pl-c1">$</span>r</span>;
-<span class="pl-c">//$a, $b, $c 类似于</span>
-<span class="pl-s1"><span class="pl-c1">$</span>a</span> = <span class="pl-k">function</span>(<span class="pl-s1"><span class="pl-c1">$</span>input</span>, <span class="pl-s1"><span class="pl-c1">$</span>next</span>) {
-    <span class="pl-s1"><span class="pl-c1">$</span>input</span>++;
-    <span class="pl-s1"><span class="pl-c1">$</span>output</span> = <span class="pl-s1"><span class="pl-c1">$</span>next</span>(<span class="pl-s1"><span class="pl-c1">$</span>input</span>);
-    <span class="pl-k">return</span> <span class="pl-s1"><span class="pl-c1">$</span>output</span>;
-};
-<span class="pl-k">function</span> <span class="pl-en">makeFn</span>(<span class="pl-s1"><span class="pl-c1">$</span>list</span>){
-    <span class="pl-c">//请实现</span>
-    <span class="pl-k">return</span> <span class="pl-k">function</span>(<span class="pl-s1"><span class="pl-c1">$</span>input</span>) <span class="pl-k">use</span>(<span class="pl-s1"><span class="pl-c1">$</span>list</span>) {
-        <span class="pl-k">foreach</span>(<span class="pl-s1"><span class="pl-c1">$</span>list</span> <span class="pl-k">as</span> <span class="pl-s1"><span class="pl-c1">$</span>item</span>){
-            <span class="pl-s1"><span class="pl-c1">$</span>item</span>(<span class="pl-s1"><span class="pl-c1">$</span>input</span>, <span class="pl-s1"><span class="pl-c1">$</span>item</span>);
-        }
-    }
-}</pre></div>
+```
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96)内存优化
+<p id="1.33">
+</p>
 
 *   使用cUrl下载大文件时，占用内存太大，有没比较优化的方式？
 > 使用cUrl下载时，文件在存入本地磁盘之前会将文件先放在内存中，文件很大时会占用内存，比较优化的方式是使用流下载，利用`CURLOPT_FILE`选项传递一个可写的文件流给到cUrl。
+
+<p id="1.34">
+</p>
 
 *   PHP 上传大文件（比如：2 GiB的视频），需要修改php.ini的哪些配置以免受到上传的大小限制？或者你有其它更好的方式？
 > 修改`upload_max_filesize`，如果nginx+php-fpm还要修改nginx的`client_max_body_size`；
 > 可以使用文件流的形式上传
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#cli)Cli
+<p id="1.35">
+</p>
 
 *   用PHP实现一个定时任务器？
 > PCNTL扩展，`pcntl_alarm()` [参考实现](https://www.cnblogs.com/CpNice/p/4528610.html)
 > swoole_timer
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E5%AE%89%E5%85%A8)安全
+<p id="1.36">
+</p>
 
 *   PHP中密码加密，使用什么方式加密？这种加密的优点是什么？
 > `password_hash()`
 > `password_hash()`使用足够强度的单向散列算法创建密码的散列（hash），来产生足够强的盐值，并且会自动进行合适的轮次。`password_hash()`是`crypt()`的一个简单封装，并且完全与现有的密码哈希兼容。
 
+<p id="1.37">
+</p>
+
 *   PHP 7.2 新增的加密方法的名称是？
 > Argon2
 
-#### 
-[<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E5%8F%8D%E5%B0%84)反射
-
-*   实现如下函数(PHP 7)
-```php
-    echo a(1, 3); //4
-    echo a(3)(5); //8
-    echo a(1, 2)(3, 4, 5)(6); //21
-    //实现不了
-    function a(){
-        $sum = array_sum(func_get_args());
-        return function() use($sum) {
-            return $sum+=array_sum(func_get_args());
-        };
-    }
-```
+<p id="1.38">
+</p>
 
 *   如何读取某函数的参数列表，以及参数的默认值。
 > 通过`func_get_args()`获取参数列表，通过` func_get_arg(index)`获取参数值
+
+<p id="1.39">
+</p>
 
 *   描述下IoC （DI）的实现原理
 > DI（依赖注入）是Ioc（控制反转）的一种实现方式。常见注入方式有`setter、contructor injection、property injection`。 [laravel服务容器-----深入理解控制反转（IoC）和依赖注入（DI）](https://www.cnblogs.com/lishanlei/p/7627367.html)
@@ -373,8 +489,14 @@ function makeFn($list){
 ### 
 [<svg class="octicon octicon-link" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg>](#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87)数据库篇
 
+<p id="2.1">
+</p>
+
 *   搭建MySQL分布式，有哪些方式？
 > 客户端方案或者中间代理方案
+
+<p id="2.2">
+</p>
 
 *   MySQL主从同步，和主主同步有哪些区别，以及优劣势？
 > 主节点 binary log dump 线程
@@ -393,17 +515,29 @@ function makeFn($list){
 > **推荐阅读**
 > [[深度探索MySQL主从复制原理](https://zhuanlan.zhihu.com/p/50597960)]
 
+<p id="2.3">
+</p>
+
 *   Laravel中，多态一对多，多对多，数据库要怎么设计？比如一个关键词表tags，需要关联用户、帖子、评论、视频等表。
 > tags表，主要字段tags_id,tags_name
 > 关联表tags_relation，主要字段,id均为个表的主键relation_id,tags_id,video_id,post_id,comment_id,video_id
+
+<p id="2.4">
+</p>
 
 *   MySQL防止注入有哪些方式？
 > 最好采用预编译语句`PreparedStatement`的方式
 > mysql语句中使用`mysql_real_escape_string()`函数进行转义
 > 打开php的设置项`magic_quotes_gpc=on`，将自动把用户提交对sql的查询进行转换
 
+<p id="2.5">
+</p>
+
 *   描述MySQL的注入原理？
 > 通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令
+
+<p id="2.6">
+</p>
 
 *   怎么解决数据库中常见的 N+1 效率问题
 比如：
@@ -422,16 +556,25 @@ function makeFn($list){
     #然后在php中按用户整理posts数据返回
 ```
 
+<p id="2.7">
+</p>
+
 *   哪些情况下字段允许null，哪些情况下不允许？
 > 尽量设置not null
 > 理由
 > 含有null值的列难以进行查询优化
 > 影响索引效率，使得索引、索引的统计信息以及比较运算更加复杂
 
+<p id="2.8">
+</p>
+
 *   MySQL中脏读应该怎么处理？
 引申：比如京东的库存，0点多人抢购的时候库存问题？
 > 解决mysql脏读的方法：1、serializable可避免脏读、不可重复读、虚读情况的发生；2、repeatable read可以避免脏读、不可重复读情况的发生；3、read committed可以避免脏读情况发生。
 > 
+
+<p id="2.9">
+</p>
 
 *   如下数据库中会有哪些值
 
@@ -449,13 +592,14 @@ function makeFn($list){
 > a, b
 > 在一个事务没有`COMMIT`或者`ROLLBACK`时再`START TRANSACTION`，会自动提交前面的事务。
 
-*   Elasticsearch 如何实现类似SQL的
-```sql
-    WHERE `id` = 12 AND `gender`  IN ('male', 'unknow’);
-```
+<p id="2.10">
+</p>
 
 *   innodb 的数据组织方式？
 > InnoDB 存储引擎以页（默认为16KB）为基本单位存储
+
+<p id="2.11">
+</p>
 
 *   B + 树的结构和插入细节？为什么主键一般都要自增？和 B 树什么区别？为什么索引要使用 B + 树不是 B 树也不是其他的平衡树？
 > B + 树的结构
@@ -483,32 +627,51 @@ function makeFn($list){
 
 > [为什么mysql索引要使用B+树，而不是B树，红黑树](https://segmentfault.com/a/1190000021488885)
 
+<p id="2.12">
+</p>
+
 * MySQL中存储索引用到的数据结构是B+树，B+树的查询时间跟树的高度有关，是log(n)，如果用hash存储，那么查询时间是O(1)。既然hash比B+树更快，为什么mysql用B+树来存储索引呢？
 
 > 答：一、从内存角度上说，数据库中的索引一般时在磁盘上，数据量大的情况可能无法一次性装入内存，B+树的设计可以允许数据分批加载。
 
 > 二、从业务场景上说，如果只选择一个数据那确实是hash更快，但是数据库中经常会选中多条这时候由于B+树索引有序，并且又有链表相连，它的查询效率比hash就快很多了。
 
+<p id="2.13">
+</p>
+
 * 为什么不用红黑树或者二叉排序树？
 
 > 答：树的查询时间跟树的高度有关，B+树是一棵多路搜索树可以降低树的高度，提高查找效率
 
+<p id="2.14">
+</p>
+
 * 既然增加树的路数可以降低树的高度，那么无限增加树的路数是不是可以有最优的查找效率？
 
->答：这样会形成一个有序数组，文件系统和数据库的索引都是存在硬盘上的，并且如果数据量大的话，不一定能一次性加载到内存中。有序数组没法一次性加载进内存，这时候B+树的多路存储威力就出来了，可以每次加载B+树的一个结点，然后一步步往下找，
+>答：不可以，这样会形成一个有序数组，文件系统和数据库的索引都是存在硬盘上的，并且如果数据量大的话，不一定能一次性加载到内存中。有序数组没法一次性加载进内存，这时候B+树的多路存储威力就出来了，可以每次加载B+树的一个结点，然后一步步往下找，
+
+<p id="2.15">
+</p>
 
 * 在内存中，红黑树比B树更优，但是涉及到磁盘操作B树就更优了，那么你能讲讲B+树吗？
 
 > B+树是在B树的基础上进行改造，它的数据都在叶子结点，同时叶子结点之间还加了指针形成链表。
 
+<p id="2.16">
+</p>
+
 * 为什么B+树要这样设计？
 
 > 答：这个跟它的使用场景有关，B+树在数据库的索引中用得比较多，数据库中select数据，不一定只选一条，很多时候会选中多条，比如按照id进行排序后选100条。如果是多条的话，B树需要做局部的中序遍历，可能要跨层访问。而B+树由于所有数据都在叶子结点不用跨层，同时由于有链表结构，只需要找到首尾，通过链表就能把所有数据取出来了。
 
-
+<p id="2.17">
+</p>
 
 *   常见的优化（这里我就不展开了，主要考察覆盖索引查询和最左匹配）
 > 
+
+<p id="2.18">
+</p>
 
 *   `redolog/undolog/binlog` 的区别？binlog 的几种格式？说下两阶段提交？
 > [必须了解的mysql三大日志-binlog、redo log和undo log]https://segmentfault.com/a/1190000023827696
@@ -550,6 +713,8 @@ MySQL想要准备事务的时候会先写redolog、binlog分成两个阶段。
 
     所以说，两阶段提交的主要用意是：为了保证redolog和binlog数据的安全一致性。只有在这两个日志文件逻辑上高度一致了。你才能放心地使用redolog帮你将数据库中的状态恢复成crash之前的状态，使用binlog实现数据备份、恢复、以及主从复制。而两阶段提交的机制可以保证这两个日志文件的逻辑是高度一致的。没有错误、没有冲突。
 
+<p id="2.19">
+</p>
 
 *   执行 insert 语句的过程是什么
 >1. 客户端（通常是你的服务）发出更新语句” update t set b = 200 where id = 2 “ 并向MySQL服务端建立连接；
@@ -570,7 +735,8 @@ MySQL想要准备事务的时候会先写redolog、binlog分成两个阶段。
 >12. 事务的两阶段提交：commit的prepare阶段：引擎把刚刚写入的redo log刷盘；
 >13. 事务的两阶段提交：commit的commit阶段：引擎binlog刷盘。
 
-
+<p id="2.20">
+</p>
 
 *   事务隔离级别和不同级别会出现的问题，innodb 默认哪个级别？MVCC 怎么实现的？快照读和当前读有啥区别？幻读的问题怎么解决？
 > 
@@ -605,6 +771,9 @@ MVCC实现
 
 > 在当前读读情况下，mysql通过next-key来避免幻读。
 
+<p id="2.21">
+</p>
+
 *  主从同步流程（异步同步）
 >* 主库把数据变更写入binlog文件
 >* 从库I/O线程发起dump请求
@@ -612,11 +781,17 @@ MVCC实现
 >* 从库I/O线程写入本地的relay log文件（与binlog格式一样）
 >* 从库SQL线程读取relay log并重新串行执行一遍，得到与主库相同的数据
 
+<p id="2.22">
+</p>
+
 *   主从同步，数据库主库和从库不一致，常见有这么几种优化方案：
 
 >1. 业务可以接受，系统不优化
 >2. 强制读主，高可用主库，用缓存提高读性能
 >3. 在cache里记录哪些记录发生过写请求，来路由读主还是读从
+
+<p id="2.23">
+</p>
 
 * InnoDB 内存结构包含四大核心组件
 >* 缓冲池 (Buffer Pool)，可以参考沈健老师文章 [缓冲池 (buffer pool)，这次彻底懂了！！！](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962450&idx=1&sn=ce17c4da8d20ce275f75d0f2ef5e40c9&chksm=bd2d098e8a5a809834aaa07da0d7546555385543fb6d687a7cf94d183ab061cd301a76547411&scene=21#wechat_redirect)
@@ -626,6 +801,8 @@ MVCC实现
 >* 自适应哈希索引 (Adaptive Hash Index)，[可以参考沈健老师文章自适应哈希索引](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962875&idx=1&sn=c6b3e7dc8a41609cfe070026bd27b71d&chksm=bd2d08278a5a813108b1f4116341ff31170574b9098e2708cbc212b008a1fac8dfd1ffeabc6b&scene=21#wechat_redirect)
 >* 日志缓冲 (Log Buffer)，[可以参考沈健老师文章 事务已提交，数据却丢了，赶紧检查下这个配置！！！ | 数据库系列](https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651962887&idx=1&sn=4806f481448b1c3ddfbbd53e732a7bb5&chksm=bd2d0bdb8a5a82cd50bc155ed2ba57f105bfd76ff78992823ed85214b5c767eef17e691a2255&scene=21#wechat_redirect)
 
+<p id="2.24">
+</p>
 
 *   explain 的 type 字段有哪些（知乎）
 
@@ -636,6 +813,9 @@ MVCC实现
 >* range：范围扫描
 >* index：索引树扫描
 >* ALL：全表扫描(full table scan)
+
+<p id="2.25">
+</p>
 
 *   MySQL中update语句的执行流程
 
@@ -648,6 +828,9 @@ MVCC实现
 > 执行器再生成这个操作的bin log，把这个bin log写入到磁盘中。
 
 > 最后执行器再调用引擎的提交事务接口，然后把redo log 的准备状态改成提交状态，这时候更新完成。
+
+<p id="2.26">
+</p>
 
 *   死锁什么时候会出现？应用层应该怎么做避免死锁？mysql 是怎么处理死锁的呢？
 
@@ -682,6 +865,8 @@ MVCC实现
 > 2. 发起死锁检测，主动回滚一条事务，让其他事务继续执行（innodb_deadlock_detect=on）。  
 > 3. 由于性能原因，一般都是使用死锁检测来进行处理死锁。
 
+<p id="2.27">
+</p>
 
 *  MySQL 遇到过死锁问题吗，你是如何解决的？
 >排查死锁的步骤：
@@ -693,9 +878,15 @@ MVCC实现
 >分析死锁日志  
 >分析死锁结果
 
+<p id="2.28">
+</p>
+
 * 常用的分库分表中间件
 >sharding-jdbc  
 >Mycat
+
+<p id="2.29">
+</p>
 
 *  分库分表可能遇到的问题
 
@@ -712,6 +903,8 @@ MVCC实现
 >* 方案三：order by + 索引（id 为索引）
 >* 方案四：利用延迟关联或者子查询优化超多分页场景。（先快速定位需要获取的 id 段，然后再关联）
 
+<p id="2.30">
+</p>
 
 *  InnoDB 四种事务隔离级别：
 
@@ -851,9 +1044,11 @@ MVCC实现
 *   [[Redis 源码日志](https://app.yinxiang.com/shard/s3/nl/317377/a52d05dd-7bb7-4dad-af76-82e88d3eb7ca/)]
 
 **名词解释**
-`RDB：Redis DB hdfs: fsimage`
-`AOF: AppendOnlyFile hdfs: edit logs`
+
+`AOF: AppendOnlyFile`
+
 `SDS: Simple dynamic string`
+
 `LRU: Least recently used`
 
 *   sds 的结构是什么？为什么要存长度？跟 c 里的字符串有什么区别？
