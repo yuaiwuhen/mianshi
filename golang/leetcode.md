@@ -2,7 +2,7 @@
  * @Date: 2022-02-22 15:16:24
  * @Author: zhaoke
  * @LastEditors: zhaoke
- * @LastEditTime: 2022-02-23 16:28:20
+ * @LastEditTime: 2022-02-23 17:28:18
  * @FilePath: /blog-go/Users/smzdm/Code/mianshi/golang/leetcode.md
 -->
 # 1. 两数之和
@@ -16,17 +16,17 @@
 
 示例 1：
 
-输入：nums = [2,7,11,15], target = 9
-输出：[0,1]
-解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
-示例 2：
+    输入：nums = [2,7,11,15], target = 9
+    输出：[0,1]
+    解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。
+    示例 2：
 
-输入：nums = [3,2,4], target = 6
-输出：[1,2]
-示例 3：
+    输入：nums = [3,2,4], target = 6
+    输出：[1,2]
+    示例 3：
 
-输入：nums = [3,3], target = 6
-输出：[0,1]
+    输入：nums = [3,3], target = 6
+    输出：[0,1]
 
 ```golang
 func main() {
@@ -61,17 +61,17 @@ func twoSum(nums []int, target int) []int {
 示例 1：
 
 
-输入：l1 = [2,4,3], l2 = [5,6,4]
-输出：[7,0,8]
-解释：342 + 465 = 807.
-示例 2：
+    输入：l1 = [2,4,3], l2 = [5,6,4]
+    输出：[7,0,8]
+    解释：342 + 465 = 807.
+    示例 2：
 
-输入：l1 = [0], l2 = [0]
-输出：[0]
-示例 3：
+    输入：l1 = [0], l2 = [0]
+    输出：[0]
+    示例 3：
 
-输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
-输出：[8,9,9,9,0,0,0,1]
+    输入：l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+    输出：[8,9,9,9,0,0,0,1]
 
 ```golang
 type ListNode struct {
@@ -133,20 +133,20 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
 示例 1:
 
-输入: s = "abcabcbb"
-输出: 3 
-解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
-示例 2:
+    输入: s = "abcabcbb"
+    输出: 3 
+    解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3。
+    示例 2:
 
-输入: s = "bbbbb"
-输出: 1
-解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
-示例 3:
+    输入: s = "bbbbb"
+    输出: 1
+    解释: 因为无重复字符的最长子串是 "b"，所以其长度为 1。
+    示例 3:
 
-输入: s = "pwwkew"
-输出: 3
-解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
-     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
+    输入: s = "pwwkew"
+    输出: 3
+    解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
+         请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
 
 ```golang
 
@@ -158,18 +158,16 @@ func main() {
 
 func lengthOfLongestSubstring(s string) int {
 	var start, step, length int
-	var sArr = strings.Split(s, "")
 	var sMap = make(map[string]int)
-	for step = 0; step < len(sArr); step++ {
-		if index, ok := sMap[sArr[step]]; ok {
+	for step = 0; step < len(s); step++ {
+		if index, ok := sMap[string(s[step])]; ok {
 			if index >= start {
 				start = index + 1
 			}
-		} else {
-			sMap[sArr[step]] = step
-			if (step - start + 1) > length {
-				length = step - start + 1
-			}
+		}
+		sMap[string(s[step])] = step
+		if (step - start + 1) > length {
+			length = step - start + 1
 		}
 	}
 	return length
