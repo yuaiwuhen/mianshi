@@ -204,8 +204,8 @@
 
 
 [算法](#算法)
->    [排序算法](php/sort.php)
->    [leetcode](golang/leetcode.md)
+>*    [排序算法](php/sort.php)
+>*    [leetcode](golang/leetcode.md)
 
 <p id="php">
 </p>
